@@ -1,0 +1,16 @@
+personnage(P1).
+personnage(P2).
+personnage(P3).
+personnage(P4).
+personnage(P5).
+personnage(P6).
+personnage(P7).
+personnage(P8).
+personnage(P9).
+personnage(P10).
+personnage(P11).
+personnage(P12).
+personnage(P13).
+personnage(P14).
+personnage(P15).
+personnage(P16).
