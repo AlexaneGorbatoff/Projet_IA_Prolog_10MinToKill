@@ -47,3 +47,8 @@ voisinGauche(P,LP):-personnage(P,X,Y,_,_),X>=2,X1 is X-1,findall(personnage(P1,X
 voisinDroit(P,LP):-personnage(P,X,Y,_,_),X=<4,X1 is X+1,findall(personnage(P1,X1,Y,R1,A1),personnage(P1,X1,Y,R1,A1),LP).
 voisinHaut(P,LP):-personnage(P,X,Y,_,_),Y>=2,Y1 is Y-1,findall(personnage(P1,X,Y1,R1,A1),personnage(P1,X,Y1,R1,A1),LP).
 voisinBas(P,LP):-personnage(P,X,Y,_,_),Y=<4,Y1 is Y-1,findall(personnage(P1,X,Y1,R1,A1),personnage(P1,X,Y1,R1,A1),LP).
+
+%Personnages susceptibles de tuer P
+peutTuer(P1,P2):-personnage(P1,X,Y,_,_),personnage(P2,X,Y,_,_).
+peutTuer(P1,P2):-personnage(P2,X,Y,_,_),caseSniper(X,Y).
+%Rajouter les cas peutTuer pour les voisins
