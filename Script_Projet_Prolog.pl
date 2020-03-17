@@ -30,7 +30,7 @@ role(r).
 role(k).
 role(c).
 
-appartenance(j).
+appartenance(j).()
 appartenance(c).
 appartenance(n).
 
@@ -51,4 +51,7 @@ voisinBas(P,LP):-personnage(P,X,Y,_,_),Y=<4,Y1 is Y-1,findall(personnage(P1,X,Y1
 %Personnages susceptibles de tuer P
 peutTuer(P1,P2):-personnage(P1,X,Y,_,_),personnage(P2,X,Y,_,_).
 peutTuer(P1,P2):-personnage(P2,X,Y,_,_),caseSniper(X,Y).
-%Rajouter les cas peutTuer pour les voisins
+%peutTuer(P1,P2):-voisinGauche(P1,LP),member(personnage(P2,_,_,_,_),LP).
+%peutTuer(P1,P2):-voisinDroit(P1,LP),member(personnage(P2,_,_,_,_),LP).
+%peutTuer(P1,P2):-voisinHaut(P1,LP),member(personnage(P2,_,_,_,_),LP).
+%peutTuer(P1,P2):-voisinBas(P1,LP),member(personnage(P2,_,_,_,_),LP).
