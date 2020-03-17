@@ -46,12 +46,18 @@ deplacer(P,X,Y):- case(X,Y), retract(personnage(P,_,_,R,A)), assert(personnage(P
 voisinGauche(P,LP):-personnage(P,X,Y,_,_),X>=2,X1 is X-1,findall(personnage(P1,X1,Y,R1,A1),personnage(P1,X1,Y,R1,A1),LP).
 voisinDroit(P,LP):-personnage(P,X,Y,_,_),X=<4,X1 is X+1,findall(personnage(P1,X1,Y,R1,A1),personnage(P1,X1,Y,R1,A1),LP).
 voisinHaut(P,LP):-personnage(P,X,Y,_,_),Y>=2,Y1 is Y-1,findall(personnage(P1,X,Y1,R1,A1),personnage(P1,X,Y1,R1,A1),LP).
-voisinBas(P,LP):-personnage(P,X,Y,_,_),Y=<4,Y1 is Y-1,findall(personnage(P1,X,Y1,R1,A1),personnage(P1,X,Y1,R1,A1),LP).
+voisinBas(P,LP):-personnage(P,X,Y,_,_),Y=<4,Y1 is Y+1,findall(personnage(P1,X,Y1,R1,A1),personnage(P1,X,Y1,R1,A1),LP).
 
-%Personnages susceptibles de tuer P
-peutTuer(P1,P2):-personnage(P1,X,Y,_,_),personnage(P2,X,Y,_,_).
-peutTuer(P1,P2):-personnage(P2,X,Y,_,_),caseSniper(X,Y).
+%%Personnages susceptibles de tuer P
+%Si il est sur la meme case que P :
+peutTuer(P1,P2):-P1 \= P2,personnage(P1,X,Y,_,_),personnage(P2,X,Y,_,_).
+%Si il est sur une case sniper
+peutTuer(P1,P2):-P1 \= P2,personnage(P2,X,Y,_,_),caseSniper(X,Y).
+%Si il est voisin de P
 peutTuer(P1,P2):-voisinGauche(P1,LP),member(personnage(P2,_,_,_,_),LP).
 peutTuer(P1,P2):-voisinDroit(P1,LP),member(personnage(P2,_,_,_,_),LP).
 peutTuer(P1,P2):-voisinHaut(P1,LP),member(personnage(P2,_,_,_,_),LP).
 peutTuer(P1,P2):-voisinBas(P1,LP),member(personnage(P2,_,_,_,_),LP).
+
+%Liste tous les suspect pour le meurtre de P
+%listSuspect(P,LP):-peutTuer(P,P1),findall(personnage(P1,X,Y,R,A),personnage(P1,X,Y,R,A),LP).
